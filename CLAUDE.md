@@ -306,3 +306,35 @@ Commits follow [Conventional Commits](https://www.conventionalcommits.org/):
   a single commit.
 - Breaking changes get a `!` after the type/scope (`feat(api)!: ...`) and a
   `BREAKING CHANGE:` footer describing the migration.
+
+## Pull request conventions
+
+- **Title** follows Commit conventions above (`<type>(<scope>): <summary>`,
+  imperative mood, under ~70 characters) — a PR is one logical change, same
+  as a commit, even when it's made up of several commits. Omit `<scope>` if
+  the PR spans both `apps/api` and `apps/web` for one feature (e.g. a new API
+  contract plus the frontend that consumes it).
+- **Before writing the description, read `git diff main` (or
+  `git diff main...HEAD`)** — don't describe the change from memory of what
+  you intended to do; describe what the diff actually contains.
+- **Body structure:**
+  - `## Summary` — what the PR implements, in terms of user-visible
+    behavior/UI, not a file-by-file narration.
+  - `## API changes` — required whenever the diff touches `apps/api`. List
+    new endpoints (method + path), and for changed endpoints show the
+    before/after response or request shape (a small diff-style snippet is
+    enough). Say explicitly "No new endpoints" when that's the case — don't
+    make the reviewer infer it from the diff.
+  - `## Known limitations` (optional) — call out any deliberate shortcuts or
+    deferred work (e.g. "computed client-side, will need a dedicated
+    endpoint once volume grows") so they're a visible decision, not a
+    surprise found later.
+  - `## Test plan` — a checklist of what was actually verified
+    (`npm run typecheck`/`test`/`lint`, manual `curl` against changed
+    endpoints, browser pass for UI changes per the root-level UI-testing
+    rule) with `[x]`/`[ ]` reflecting what was and wasn't done, not a
+    generic template.
+- Use `gh pr create --title "..." --body "$(cat <<'EOF' ... EOF)"` (heredoc,
+  never a raw `-b` string) so multi-line Markdown survives shell quoting.
+- Don't push or open the PR without being asked; once asked, push the current
+  branch with `-u` and target `main` unless told otherwise.
