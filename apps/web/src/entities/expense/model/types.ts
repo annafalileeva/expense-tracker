@@ -22,3 +22,10 @@ export interface ExpenseFilters {
   page?: number;
   limit?: number;
 }
+
+export interface CategoryTotal {
+  id: string;
+  name: string;
+  color?: string | null;
+  total: number;
+}
