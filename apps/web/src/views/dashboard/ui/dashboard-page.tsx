@@ -6,7 +6,7 @@ import { DashboardSummary } from '@/widgets/dashboard-summary';
 export function DashboardPage() {
   return (
     <>
-      <Header title="Дашборд" />
+      <Header title="Расходы" />
       <main className="space-y-6 p-6">
         <DashboardSummary total={0} count={0} average={0} />
         <CategoryBreakdown items={[]} />
