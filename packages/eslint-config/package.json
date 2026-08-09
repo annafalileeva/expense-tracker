@@ -1,0 +1,26 @@
+{
+  "name": "@expence-tracker/eslint-config",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./base.mjs",
+    "./next": "./next.mjs",
+    "./nest": "./nest.mjs"
+  },
+  "files": [
+    "base.mjs",
+    "next.mjs",
+    "nest.mjs"
+  ],
+  "dependencies": {
+    "@eslint/js": "^10.0.1",
+    "eslint-config-next": "^16.2.12",
+    "eslint-config-prettier": "^10.1.8",
+    "typescript-eslint": "^8.65.0"
+  },
+  "peerDependencies": {
+    "eslint": "^10.0.0",
+    "typescript": "^5.9.0"
+  }
+}

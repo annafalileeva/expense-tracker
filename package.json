@@ -1,0 +1,33 @@
+{
+  "name": "expence-tracker",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Трекер расходов: Next.js + Nest.js + PostgreSQL/Prisma",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "dev": "concurrently -n api,web -c cyan,magenta \"npm run dev -w @expence-tracker/api\" \"npm run dev -w @expence-tracker/web\"",
+    "build": "npm run build -w @expence-tracker/database && npm run build -w @expence-tracker/api && npm run build -w @expence-tracker/web",
+    "lint": "npm run lint --workspaces --if-present",
+    "format": "prettier --write \"**/*.{ts,tsx,js,mjs,json,md,css}\"",
+    "format:check": "prettier --check \"**/*.{ts,tsx,js,mjs,json,md,css}\"",
+    "typecheck": "npm run typecheck --workspaces --if-present",
+    "db:up": "docker compose up -d",
+    "db:down": "docker compose down",
+    "db:generate": "npm run generate -w @expence-tracker/database",
+    "db:migrate": "npm run migrate:dev -w @expence-tracker/database",
+    "db:studio": "npm run studio -w @expence-tracker/database"
+  },
+  "devDependencies": {
+    "@expence-tracker/eslint-config": "*",
+    "concurrently": "^10.0.4",
+    "eslint": "^10.8.0",
+    "prettier": "^3.9.6",
+    "typescript": "5.9.3"
+  }
+}

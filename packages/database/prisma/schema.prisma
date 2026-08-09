@@ -1,0 +1,71 @@
+// Схема БД трекера расходов.
+// Стартовый набор моделей — предметную область (бюджеты, повторяющиеся траты,
+// теги) прорабатываем отдельной задачей.
+
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model User {
+  id           String   @id @default(uuid())
+  email        String   @unique
+  name         String
+  // bcrypt-хэш пароля, наружу через API никогда не отдаётся
+  passwordHash String
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  categories Category[]
+  expenses   Expense[]
+
+  @@map("users")
+}
+
+model Category {
+  id        String   @id @default(uuid())
+  name      String
+  // Цвет для отображения в UI, hex-строка вида #7C3AED
+  color     String?
+  icon      String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  expenses Expense[]
+
+  // Имя категории уникально в пределах пользователя
+  @@unique([userId, name])
+  @@index([userId])
+  @@map("categories")
+}
+
+model Expense {
+  id String @id @default(uuid())
+
+  // Decimal, а не Float: с деньгами плавающая точка недопустима
+  amount   Decimal  @db.Decimal(12, 2)
+  currency String   @default("RUB") @db.Char(3)
+  note     String?
+  spentAt  DateTime
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  categoryId String?
+  category   Category? @relation(fields: [categoryId], references: [id], onDelete: SetNull)
+
+  // Основной сценарий чтения — траты пользователя за период
+  @@index([userId, spentAt])
+  @@index([categoryId])
+  @@map("expenses")
+}

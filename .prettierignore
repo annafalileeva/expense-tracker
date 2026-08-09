@@ -1,0 +1,6 @@
+node_modules/
+dist/
+.next/
+coverage/
+packages/database/src/generated/
+package-lock.json
