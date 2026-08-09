@@ -1,5 +1,6 @@
 import type { ExpenseDto, ExpenseFilters } from '../model/types';
 import { serverApiFetch } from '@/shared/api/server';
+import type { Paginated } from '@/shared/api/types';
 
 export interface ExpenseInput {
   amount: number;
@@ -9,7 +10,7 @@ export interface ExpenseInput {
   categoryId?: string;
 }
 
-export function listExpenses(filters: ExpenseFilters = {}): Promise<ExpenseDto[]> {
+export function listExpenses(filters: ExpenseFilters = {}): Promise<Paginated<ExpenseDto>> {
   const params = new URLSearchParams(
     Object.entries(filters)
       .filter(([, value]) => value !== undefined && value !== '')
@@ -18,7 +19,7 @@ export function listExpenses(filters: ExpenseFilters = {}): Promise<ExpenseDto[]
 
   const query = params.size > 0 ? `?${params.toString()}` : '';
 
-  return serverApiFetch<ExpenseDto[]>(`/expenses${query}`, { cache: 'no-store' });
+  return serverApiFetch<Paginated<ExpenseDto>>(`/expenses${query}`, { cache: 'no-store' });
 }
 
 export function getExpense(id: string): Promise<ExpenseDto> {

@@ -1,12 +1,6 @@
 import { Card, CardHeader, CardTitle, CardContent } from '@/shared/ui/card';
 import { formatMoney } from '@/shared/lib/format';
-
-export interface CategoryTotal {
-  id: string;
-  name: string;
-  color?: string | null;
-  total: number;
-}
+import type { CategoryTotal } from '@/entities/expense';
 
 interface CategoryBreakdownProps {
   items: CategoryTotal[];
