@@ -14,6 +14,7 @@ import {
 import { CommandBus, QueryBus } from '@nestjs/cqrs';
 import type { Expense } from '@expence-tracker/database';
 import { CurrentUser } from '../../common/decorators/current-user.decorator';
+import type { PaginatedResult } from '../../common/dto/paginated-result';
 import type { UserView } from '../users/queries';
 import { CreateExpenseCommand, DeleteExpenseCommand, UpdateExpenseCommand } from './commands';
 import { CreateExpenseDto } from './dto/create-expense.dto';
@@ -29,13 +30,16 @@ export class ExpensesController {
   ) {}
 
   @Get()
-  findAll(@CurrentUser() user: UserView, @Query() query: QueryExpensesDto): Promise<Expense[]> {
+  findAll(
+    @CurrentUser() user: UserView,
+    @Query() query: QueryExpensesDto,
+  ): Promise<PaginatedResult<Expense>> {
     return this.queryBus.execute(
       new ListExpensesQuery(
         user.id,
         { categoryId: query.categoryId, from: query.from, to: query.to },
-        query.skip,
-        query.take,
+        query.page ?? 1,
+        query.limit ?? 20,
       ),
     );
   }

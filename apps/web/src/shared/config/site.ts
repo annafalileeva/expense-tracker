@@ -11,3 +11,9 @@ export const navItems = [
   { href: '/categories', label: 'Категории' },
   { href: '/settings', label: 'Настройки' },
 ] as const;
+
+export const dashboardConfig = {
+  recentExpensesLimit: 10,
+  /** Потолок, который пропускает @Max(100) в PaginationQueryDto на бэкенде. */
+  summaryFetchLimit: 100,
+} as const;
