@@ -307,6 +307,27 @@ Commits follow [Conventional Commits](https://www.conventionalcommits.org/):
 - Breaking changes get a `!` after the type/scope (`feat(api)!: ...`) and a
   `BREAKING CHANGE:` footer describing the migration.
 
+## Branching (GitHub Flow)
+
+This repo follows [GitHub Flow](https://docs.github.com/en/get-started/using-github/github-flow):
+
+- `main` is always deployable. Nothing is committed directly to `main` —
+  all work happens on a branch and lands via a pull request.
+- Branch from `main` for every change, including small ones. Branch names
+  are `<type>/<kebab-case-description>`, using the same `<type>` values as
+  commit types (§ Commit conventions) — e.g. `feature/dashboard-view`,
+  `fix/expense-filter-timezone`, `chore/bump-eslint`. Use `feature/` (not
+  `feat/`) as the branch prefix to keep branch names visually distinct from
+  commit subject lines.
+- Push the branch and open a PR early (draft if not ready for review) so
+  work is visible; commit to it following § Commit conventions.
+- Merge to `main` only through a PR — squash or merge per the repo's
+  existing history on the PR, not by pushing directly to `main`.
+- Delete the branch after merge; don't reuse a merged branch name for
+  unrelated follow-up work.
+- Keep branches short-lived and scoped to one feature/fix — if a branch
+  starts accumulating unrelated changes, split it.
+
 ## Pull request conventions
 
 - **Title** follows Commit conventions above (`<type>(<scope>): <summary>`,
