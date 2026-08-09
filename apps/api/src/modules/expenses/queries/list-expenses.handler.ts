@@ -1,13 +1,17 @@
 import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
 import { Prisma, type Expense } from '@expence-tracker/database';
 import { PrismaService } from '../../../prisma/prisma.service';
+import type { PaginatedResult } from '../../../common/dto/paginated-result';
 import { ListExpensesQuery } from './list-expenses.query';
 
 @QueryHandler(ListExpensesQuery)
-export class ListExpensesHandler implements IQueryHandler<ListExpensesQuery, Expense[]> {
+export class ListExpensesHandler implements IQueryHandler<
+  ListExpensesQuery,
+  PaginatedResult<Expense>
+> {
   constructor(private readonly prisma: PrismaService) {}
 
-  execute(query: ListExpensesQuery): Promise<Expense[]> {
+  async execute(query: ListExpensesQuery): Promise<PaginatedResult<Expense>> {
     const { categoryId, from, to } = query.filters;
 
     const where: Prisma.ExpenseWhereInput = {
@@ -16,12 +20,17 @@ export class ListExpensesHandler implements IQueryHandler<ListExpensesQuery, Exp
       spentAt: from || to ? { gte: from, lte: to } : undefined,
     };
 
-    return this.prisma.expense.findMany({
-      where,
-      skip: query.skip,
-      take: query.take,
-      orderBy: { spentAt: 'desc' },
-      include: { category: true },
-    });
+    const [items, total] = await this.prisma.$transaction([
+      this.prisma.expense.findMany({
+        where,
+        skip: (query.page - 1) * query.limit,
+        take: query.limit,
+        orderBy: { spentAt: 'desc' },
+        include: { category: true },
+      }),
+      this.prisma.expense.count({ where }),
+    ]);
+
+    return { items, total, page: query.page, limit: query.limit };
   }
 }
