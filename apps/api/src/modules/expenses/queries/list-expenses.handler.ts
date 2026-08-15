@@ -4,6 +4,13 @@ import { PrismaService } from '../../../prisma/prisma.service';
 import type { PaginatedResult } from '../../../common/dto/paginated-result';
 import { ListExpensesQuery } from './list-expenses.query';
 
+/**
+ * Обрабатывает {@link ListExpensesQuery}: возвращает постраничный список
+ * расходов пользователя с фильтрами по категории/периоду. Использует
+ * `@@index([userId, spentAt])`, поэтому фильтр по периоду опирается на
+ * `spentAt`. Выборка и подсчёт total выполняются одним `$transaction`, чтобы
+ * `total` соответствовал `items` при конкурентных записях.
+ */
 @QueryHandler(ListExpensesQuery)
 export class ListExpensesHandler implements IQueryHandler<
   ListExpensesQuery,
@@ -11,6 +18,12 @@ export class ListExpensesHandler implements IQueryHandler<
 > {
   constructor(private readonly prisma: PrismaService) {}
 
+  /**
+   * @param query - запрос с userId, фильтрами и параметрами пагинации.
+   * @returns Страница расходов (с включённой категорией) и общее количество
+   *   записей, подходящих под фильтр.
+   * @throws {Prisma.PrismaClientKnownRequestError} При сбое на уровне БД внутри `$transaction`.
+   */
   async execute(query: ListExpensesQuery): Promise<PaginatedResult<Expense>> {
     const { categoryId, from, to } = query.filters;
 
