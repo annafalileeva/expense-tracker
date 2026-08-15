@@ -162,3 +162,7 @@ This repo follows [GitHub Flow](https://docs.github.com/en/get-started/using-git
 - Don't push or open the PR without being asked; once asked, push the current
   branch with `-u` and target `main` unless told otherwise.
 </important>
+
+## Документация
+При добавлении функционала проверяй .claude/docs/*.
+Актуализируй файлы при изменении архитектуры или API.
