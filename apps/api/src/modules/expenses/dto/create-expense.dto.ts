@@ -10,6 +10,10 @@ import {
   MaxLength,
 } from 'class-validator';
 
+/**
+ * Тело запроса `POST /expenses`. `userId` в DTO нет — он берётся из JWT
+ * через `@CurrentUser()`, а не из тела запроса.
+ */
 export class CreateExpenseDto {
   // maxDecimalPlaces соответствует Decimal(12, 2) в схеме Prisma
   @IsNumber({ maxDecimalPlaces: 2 })

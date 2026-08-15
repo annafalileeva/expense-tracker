@@ -4,10 +4,20 @@ import type { Expense } from '@expence-tracker/database';
 import { PrismaService } from '../../../prisma/prisma.service';
 import { CreateExpenseCommand } from './create-expense.command';
 
+/**
+ * Обрабатывает {@link CreateExpenseCommand}: проверяет, что указанная
+ * категория (если есть) принадлежит пользователю, и создаёт расход.
+ */
 @CommandHandler(CreateExpenseCommand)
 export class CreateExpenseHandler implements ICommandHandler<CreateExpenseCommand, Expense> {
   constructor(private readonly prisma: PrismaService) {}
 
+  /**
+   * @param command - команда создания расхода с userId и payload.
+   * @returns Созданный расход.
+   * @throws {NotFoundException} Если `payload.categoryId` указан, но категория
+   *   с таким id не существует или принадлежит другому пользователю.
+   */
   async execute(command: CreateExpenseCommand): Promise<Expense> {
     const { categoryId } = command.payload;
 

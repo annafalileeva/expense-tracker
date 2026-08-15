@@ -86,3 +86,7 @@ so every feature module imports it explicitly.
   `UpdateExpenseDto` are now plain `PartialType(CreateCategoryDto)` /
   `PartialType(CreateExpenseDto)` since `userId` isn't in the Create DTOs
   anymore and there's nothing left to `OmitType`.
+
+## Документация
+После изменения методов — обновляй JSDoc.
+Для DTO и контроллеров — добавляй/обновляй Swagger декораторы.

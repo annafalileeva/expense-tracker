@@ -12,6 +12,7 @@ import {
   Query,
 } from '@nestjs/common';
 import { CommandBus, QueryBus } from '@nestjs/cqrs';
+import { ApiBearerAuth } from '@nestjs/swagger';
 import type { Category } from '@expence-tracker/database';
 import { CurrentUser } from '../../common/decorators/current-user.decorator';
 import { PaginationQueryDto } from '../../common/dto/pagination-query.dto';
@@ -21,6 +22,7 @@ import { CreateCategoryDto } from './dto/create-category.dto';
 import { UpdateCategoryDto } from './dto/update-category.dto';
 import { GetCategoryQuery, ListCategoriesQuery } from './queries';
 
+@ApiBearerAuth()
 @Controller('categories')
 export class CategoriesController {
   constructor(
