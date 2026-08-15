@@ -1,10 +1,12 @@
 import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Patch } from '@nestjs/common';
 import { CommandBus, QueryBus } from '@nestjs/cqrs';
+import { ApiBearerAuth } from '@nestjs/swagger';
 import { CurrentUser } from '../../common/decorators/current-user.decorator';
 import { DeleteUserCommand, UpdateUserCommand } from './commands';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { GetUserByIdQuery, UserView } from './queries';
 
+@ApiBearerAuth()
 @Controller('users')
 export class UsersController {
   constructor(

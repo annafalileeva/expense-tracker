@@ -1,5 +1,6 @@
 import { Body, Controller, Get, HttpCode, HttpStatus, Post } from '@nestjs/common';
 import { CommandBus } from '@nestjs/cqrs';
+import { ApiBearerAuth } from '@nestjs/swagger';
 import { Public } from '../../common/decorators/public.decorator';
 import { CurrentUser } from '../../common/decorators/current-user.decorator';
 import type { UserView } from '../users/queries';
@@ -26,6 +27,7 @@ export class AuthController {
     return this.commandBus.execute(new LoginCommand(dto.email, dto.password));
   }
 
+  @ApiBearerAuth()
   @Get('me')
   me(@CurrentUser() user: UserView): UserView {
     return user;
