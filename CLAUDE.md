@@ -85,30 +85,6 @@ latest (7.x). `@nestjs/cli@11` depends on 5.9.3 directly, and Nest relies on
 across workspaces should keep this version in sync; don't bump TypeScript in
 just one workspace.
 
-<important if="Нужно написать коммит">
-## Commit conventions
-Commits follow [Conventional Commits](https://www.conventionalcommits.org/):
-```
-<type>(<scope>): <summary>
-<body>
-```
-- `<type>` is one of `feat`, `fix`, `refactor`, `chore`, `docs`, `test`,
-  `style`, `perf`, `build`, `ci`. Use `feat`/`fix` only for changes that
-  affect runtime behavior; config/tooling/dependency changes are `chore`,
-  formatting-only changes are `style`.
-- `<scope>` is the workspace or feature the change is about — e.g. `api`,
-  `web`, `database`, `auth`, `expenses`, `categories` — omit it only for
-  changes that cut across the whole repo (e.g. root tooling).
-- `<summary>` is written in the imperative mood ("add", not "added"/"adds"),
-  lowercase, no trailing period, under ~72 characters.
-- The body (optional, separated by a blank line) explains *why*, not what —
-  the diff already shows what changed. Wrap at ~72 characters.
-- One logical change per commit; don't bundle unrelated features/fixes into
-  a single commit.
-- Breaking changes get a `!` after the type/scope (`feat(api)!: ...`) and a
-  `BREAKING CHANGE:` footer describing the migration.
-</important>
-
 ## Branching (GitHub Flow)
 
 This repo follows [GitHub Flow](https://docs.github.com/en/get-started/using-github/github-flow):
