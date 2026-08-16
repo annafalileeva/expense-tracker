@@ -1,18 +1,20 @@
 import { Header } from '@/widgets/header';
+import { listCategories } from '@/entities/category';
+import { getExpense } from '@/entities/expense';
 import { ExpenseForm } from '@/features/expense/manage-expense';
 
 interface ExpenseEditPageProps {
   id: string;
 }
 
-// TODO: загрузить расход через getExpense(id) и категории через listCategories().
-export function ExpenseEditPage({ id }: ExpenseEditPageProps) {
+export async function ExpenseEditPage({ id }: ExpenseEditPageProps) {
+  const [categories, expense] = await Promise.all([listCategories(), getExpense(id)]);
+
   return (
     <>
       <Header title="Редактирование расхода" />
       <main className="p-6">
-        <p className="mb-4 text-sm text-muted-foreground">ID: {id}</p>
-        <ExpenseForm categories={[]} />
+        <ExpenseForm categories={categories} expense={expense} />
       </main>
     </>
   );
