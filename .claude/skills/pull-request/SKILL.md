@@ -1,7 +1,7 @@
 ---
 name: pull-request
 description: Создаёт pull request на GitHub из текущей ветки в указанную целевую ветку, с заданным заголовком PR. Используй, когда просят открыть/создать PR, "запушить и сделать пулл-реквест" или явно вызывают /pull-request с аргументами.
-argument-hint: [base-branch] [pr-title]
+argument-hint: <base-branch> <pr-title>
 model: sonnet
 allowed-tools: Bash(git status:*), Bash(git diff:*), Bash(git log:*), Bash(git branch:*), Bash(git push:*), Bash(gh pr create:*), Bash(gh pr view:*), Bash(gh repo view:*)
 ---
