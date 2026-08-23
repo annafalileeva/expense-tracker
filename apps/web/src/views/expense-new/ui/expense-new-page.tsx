@@ -7,8 +7,8 @@ export async function ExpenseNewPage() {
 
   return (
     <>
-      <Header title="Новый расход" />
-      <main className="p-6">
+      <Header title="Новый расход" description="Заполните детали, чтобы записать трату." />
+      <main className="p-8 pt-6">
         <ExpenseForm categories={categories} />
       </main>
     </>

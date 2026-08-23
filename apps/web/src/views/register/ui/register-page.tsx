@@ -5,7 +5,7 @@ export function RegisterPage() {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Регистрация</CardTitle>
+        <CardTitle className="text-xl font-bold">Регистрация</CardTitle>
         <CardDescription>Создайте аккаунт, чтобы начать учёт расходов</CardDescription>
       </CardHeader>
       <CardContent>

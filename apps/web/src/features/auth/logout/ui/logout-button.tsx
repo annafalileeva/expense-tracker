@@ -12,7 +12,7 @@ function SubmitButton() {
       type="submit"
       variant="ghost"
       size="sm"
-      className="w-full justify-start"
+      className="w-full justify-start rounded-full px-4 text-white/60 hover:bg-white/10 hover:text-white"
       disabled={pending}
     >
       {pending ? 'Выход…' : 'Выйти'}

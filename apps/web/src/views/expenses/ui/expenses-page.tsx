@@ -1,9 +1,12 @@
 import { Suspense } from 'react';
+import Link from 'next/link';
+import { Plus } from 'lucide-react';
 import { Header } from '@/widgets/header';
 import { ExpenseFilters } from '@/features/expense/filter-expenses';
 import { listExpenses, ExpenseTable } from '@/entities/expense';
 import { listCategories } from '@/entities/category';
 import { PaginationBar } from '@/widgets/pagination';
+import { Button } from '@/shared/ui/button';
 import { parsePageParam } from '@/shared/lib/pagination';
 
 interface ExpensesPageProps {
@@ -40,8 +43,19 @@ export async function ExpensesPage({ searchParams }: ExpensesPageProps) {
 
   return (
     <>
-      <Header title="Расходы" />
-      <main className="space-y-4 p-6">
+      <Header
+        title="Расходы"
+        description="Полный список ваших трат с фильтрами по категории и дате."
+        action={
+          <Link href="/expenses/new">
+            <Button size="lg">
+              <Plus className="size-4" />
+              Добавить расход
+            </Button>
+          </Link>
+        }
+      />
+      <main className="space-y-4 p-8 pt-6">
         <Suspense fallback={null}>
           <ExpenseFilters categories={categories} />
         </Suspense>

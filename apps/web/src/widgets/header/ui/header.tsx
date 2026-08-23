@@ -1,17 +1,19 @@
-import Link from 'next/link';
-import { Button } from '@/shared/ui/button';
+import type { ReactNode } from 'react';
 
 interface HeaderProps {
   title: string;
+  description?: string;
+  action?: ReactNode;
 }
 
-export function Header({ title }: HeaderProps) {
+export function Header({ title, description, action }: HeaderProps) {
   return (
-    <header className="flex items-center justify-between border-b border-border px-6 py-4">
-      <h1 className="text-lg font-semibold">{title}</h1>
-      <Link href="/expenses/new">
-        <Button>Добавить расход</Button>
-      </Link>
+    <header className="flex items-start justify-between gap-4 px-8 pt-8 pb-2">
+      <div>
+        <h1 className="font-display text-2xl font-bold tracking-tight text-foreground">{title}</h1>
+        {description ? <p className="mt-1 text-sm text-muted-foreground">{description}</p> : null}
+      </div>
+      {action}
     </header>
   );
 }

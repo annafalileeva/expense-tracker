@@ -5,7 +5,7 @@ export function LoginPage() {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Вход</CardTitle>
+        <CardTitle className="text-xl font-bold">Вход</CardTitle>
         <CardDescription>Введите email и пароль, чтобы продолжить</CardDescription>
       </CardHeader>
       <CardContent>
