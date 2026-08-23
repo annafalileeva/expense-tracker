@@ -11,12 +11,12 @@ export async function CategoriesPage() {
 
   return (
     <>
-      <Header title="Категории" />
-      <main className="space-y-4 p-6">
-        <div className="flex justify-end">
-          <CategoryFormDialog trigger={<Button>Добавить категорию</Button>} />
-        </div>
-
+      <Header
+        title="Категории"
+        description="Управляйте категориями, по которым группируются расходы."
+        action={<CategoryFormDialog trigger={<Button size="lg">Добавить категорию</Button>} />}
+      />
+      <main className="space-y-4 p-8 pt-6">
         <Table>
           <thead>
             <tr>

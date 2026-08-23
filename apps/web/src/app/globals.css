@@ -7,75 +7,94 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  --radius: 0.625rem;
+  --radius: 1.125rem;
 
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.141 0.005 285.823);
+  /* Тёплая бумажная подложка страницы (не белая) + карточки на чистом белом —
+     мягкий контраст без резких границ, как в референсе. */
+  --background: oklch(0.969 0.004 95);
+  --foreground: oklch(0.18 0.012 285);
   --card: oklch(1 0 0);
-  --card-foreground: oklch(0.141 0.005 285.823);
+  --card-foreground: oklch(0.18 0.012 285);
   --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.141 0.005 285.823);
-  --primary: oklch(0.554 0.222 293.85);
-  --primary-foreground: oklch(0.969 0.016 293.756);
-  --secondary: oklch(0.967 0.001 286.375);
+  --popover-foreground: oklch(0.18 0.012 285);
+  /* Primary = чернильно-тёмный (не фиолетовый): пилюльные кнопки и сайдбар
+     в референсе почти чёрные, а не брендово-цветные. */
+  --primary: oklch(0.18 0.012 285);
+  --primary-foreground: oklch(0.98 0.002 95);
+  --secondary: oklch(0.955 0.005 95);
   --secondary-foreground: oklch(0.21 0.006 285.885);
-  --muted: oklch(0.967 0.001 286.375);
-  --muted-foreground: oklch(0.552 0.016 285.938);
-  --accent: oklch(0.967 0.001 286.375);
+  --muted: oklch(0.955 0.005 95);
+  --muted-foreground: oklch(0.53 0.014 286);
+  --accent: oklch(0.955 0.005 95);
   --accent-foreground: oklch(0.21 0.006 285.885);
   --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.92 0.004 286.32);
-  --input: oklch(0.92 0.004 286.32);
-  --ring: oklch(0.554 0.222 293.85);
+  --border: oklch(0.91 0.006 95);
+  --input: oklch(0.91 0.006 95);
+  --ring: oklch(0.56 0.19 288);
 
   /* Семантические токены приложения — не относятся к UI-киту. */
-  --color-expense: #dc2626;
-  --color-income: #16a34a;
+  --color-expense: #dc5f3c;
+  --color-income: #2f9e6e;
+  --color-violet: #5b4fe8;
+  --color-sand: #d9a441;
+  --color-sidebar: oklch(0.18 0.012 285);
 }
 
 .dark {
-  --background: oklch(0.141 0.005 285.823);
-  --foreground: oklch(0.985 0 0);
-  --card: oklch(0.21 0.006 285.885);
-  --card-foreground: oklch(0.985 0 0);
-  --popover: oklch(0.21 0.006 285.885);
-  --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.704 0.191 293.334);
-  --primary-foreground: oklch(0.208 0.042 265.755);
-  --secondary: oklch(0.274 0.006 286.033);
-  --secondary-foreground: oklch(0.985 0 0);
-  --muted: oklch(0.274 0.006 286.033);
-  --muted-foreground: oklch(0.705 0.015 286.067);
-  --accent: oklch(0.274 0.006 286.033);
-  --accent-foreground: oklch(0.985 0 0);
+  --background: oklch(0.16 0.008 285);
+  --foreground: oklch(0.97 0.004 95);
+  --card: oklch(0.205 0.01 285);
+  --card-foreground: oklch(0.97 0.004 95);
+  --popover: oklch(0.205 0.01 285);
+  --popover-foreground: oklch(0.97 0.004 95);
+  --primary: oklch(0.97 0.004 95);
+  --primary-foreground: oklch(0.16 0.008 285);
+  --secondary: oklch(0.27 0.01 285);
+  --secondary-foreground: oklch(0.97 0.004 95);
+  --muted: oklch(0.27 0.01 285);
+  --muted-foreground: oklch(0.66 0.012 286);
+  --accent: oklch(0.27 0.01 285);
+  --accent-foreground: oklch(0.97 0.004 95);
   --destructive: oklch(0.704 0.191 22.216);
   --border: oklch(1 0 0 / 10%);
   --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.704 0.191 293.334);
+  --ring: oklch(0.66 0.16 288);
+
+  --color-expense: #ef7a56;
+  --color-income: #3fb885;
+  --color-violet: #8b82ff;
+  --color-sand: #e8b855;
+  --color-sidebar: oklch(0.1 0.01 285);
 }
 
 /* До появления переключателя темы — тёмная схема следует системной,
    как и раньше, но переиспользует те же токены, что и класс .dark. */
 @media (prefers-color-scheme: dark) {
   :root:not(.light) {
-    --background: oklch(0.141 0.005 285.823);
-    --foreground: oklch(0.985 0 0);
-    --card: oklch(0.21 0.006 285.885);
-    --card-foreground: oklch(0.985 0 0);
-    --popover: oklch(0.21 0.006 285.885);
-    --popover-foreground: oklch(0.985 0 0);
-    --primary: oklch(0.704 0.191 293.334);
-    --primary-foreground: oklch(0.208 0.042 265.755);
-    --secondary: oklch(0.274 0.006 286.033);
-    --secondary-foreground: oklch(0.985 0 0);
-    --muted: oklch(0.274 0.006 286.033);
-    --muted-foreground: oklch(0.705 0.015 286.067);
-    --accent: oklch(0.274 0.006 286.033);
-    --accent-foreground: oklch(0.985 0 0);
+    --background: oklch(0.16 0.008 285);
+    --foreground: oklch(0.97 0.004 95);
+    --card: oklch(0.205 0.01 285);
+    --card-foreground: oklch(0.97 0.004 95);
+    --popover: oklch(0.205 0.01 285);
+    --popover-foreground: oklch(0.97 0.004 95);
+    --primary: oklch(0.97 0.004 95);
+    --primary-foreground: oklch(0.16 0.008 285);
+    --secondary: oklch(0.27 0.01 285);
+    --secondary-foreground: oklch(0.97 0.004 95);
+    --muted: oklch(0.27 0.01 285);
+    --muted-foreground: oklch(0.66 0.012 286);
+    --accent: oklch(0.27 0.01 285);
+    --accent-foreground: oklch(0.97 0.004 95);
     --destructive: oklch(0.704 0.191 22.216);
     --border: oklch(1 0 0 / 10%);
     --input: oklch(1 0 0 / 15%);
-    --ring: oklch(0.704 0.191 293.334);
+    --ring: oklch(0.66 0.16 288);
+
+    --color-expense: #ef7a56;
+    --color-income: #3fb885;
+    --color-violet: #8b82ff;
+    --color-sand: #e8b855;
+    --color-sidebar: oklch(0.1 0.01 285);
   }
 }
 
@@ -100,10 +119,15 @@
   --color-ring: var(--ring);
   --color-expense: var(--color-expense);
   --color-income: var(--color-income);
+  --color-violet: var(--color-violet);
+  --color-sand: var(--color-sand);
+  --color-sidebar: var(--color-sidebar);
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) + 4px);
+  --radius-xl: calc(var(--radius) + 10px);
+  --font-sans: var(--font-body);
+  --font-display: var(--font-heading);
 }
 
 @layer base {
@@ -112,6 +136,6 @@
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-sans;
   }
 }

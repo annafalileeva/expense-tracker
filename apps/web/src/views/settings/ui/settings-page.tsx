@@ -5,8 +5,8 @@ import { siteConfig } from '@/shared/config/site';
 export function SettingsPage() {
   return (
     <>
-      <Header title="Настройки" />
-      <main className="p-6">
+      <Header title="Настройки" description="Параметры аккаунта и приложения." />
+      <main className="p-8 pt-6">
         <Card className="max-w-md">
           <CardHeader>
             <CardTitle>Валюта по умолчанию</CardTitle>

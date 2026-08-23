@@ -12,8 +12,8 @@ export async function ExpenseEditPage({ id }: ExpenseEditPageProps) {
 
   return (
     <>
-      <Header title="Редактирование расхода" />
-      <main className="p-6">
+      <Header title="Редактирование расхода" description="Измените детали этой траты." />
+      <main className="p-8 pt-6">
         <ExpenseForm categories={categories} expense={expense} />
       </main>
     </>

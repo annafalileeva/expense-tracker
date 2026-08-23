@@ -14,7 +14,7 @@ interface ExpenseTableProps {
 export function ExpenseTable({ expenses, editable = false }: ExpenseTableProps) {
   if (expenses.length === 0) {
     return (
-      <div className="rounded-lg border border-dashed border-border p-10 text-center text-muted-foreground">
+      <div className="rounded-2xl border border-dashed border-border p-10 text-center text-muted-foreground">
         Расходов пока нет
       </div>
     );
@@ -47,12 +47,7 @@ export function ExpenseTable({ expenses, editable = false }: ExpenseTableProps) 
             {editable ? (
               <Td>
                 <div className="flex justify-end">
-                  <Button
-                    variant="ghost"
-                    size="icon-sm"
-                    aria-label="Редактировать расход"
-                    asChild
-                  >
+                  <Button variant="ghost" size="icon-sm" aria-label="Редактировать расход" asChild>
                     <Link href={`/expenses/${expense.id}/edit`}>
                       <Pencil />
                     </Link>
