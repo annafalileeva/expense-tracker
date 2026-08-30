@@ -1,7 +1,7 @@
 'use client';
 
 import { Trash2 } from 'lucide-react';
-import { useActionState, useEffect, useState } from 'react';
+import { useActionState, useState } from 'react';
 import { useFormStatus } from 'react-dom';
 import {
   AlertDialog,
@@ -38,12 +38,14 @@ export function DeleteCategoryDialog({ categoryId, categoryName }: DeleteCategor
   const [open, setOpen] = useState(false);
   const action = deleteCategoryAction.bind(null, categoryId);
   const [state, formAction] = useActionState(action, initialState);
+  const [handledState, setHandledState] = useState(state);
 
-  useEffect(() => {
+  if (state !== handledState) {
+    setHandledState(state);
     if (state.success) {
       setOpen(false);
     }
-  }, [state.success]);
+  }
 
   return (
     <AlertDialog open={open} onOpenChange={setOpen}>

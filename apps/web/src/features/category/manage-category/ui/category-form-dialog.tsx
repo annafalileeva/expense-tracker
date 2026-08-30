@@ -1,6 +1,6 @@
 'use client';
 
-import { type ReactNode, useActionState, useEffect, useState } from 'react';
+import { type ReactNode, useActionState, useState } from 'react';
 import { useFormStatus } from 'react-dom';
 import type { CategoryDto } from '@/entities/category';
 import { Alert, AlertDescription } from '@/shared/ui/alert';
@@ -43,12 +43,14 @@ export function CategoryFormDialog({ category, trigger }: CategoryFormDialogProp
   const [open, setOpen] = useState(false);
   const action = category ? updateCategoryAction.bind(null, category.id) : createCategoryAction;
   const [state, formAction] = useActionState(action, initialState);
+  const [handledState, setHandledState] = useState(state);
 
-  useEffect(() => {
+  if (state !== handledState) {
+    setHandledState(state);
     if (state.success) {
       setOpen(false);
     }
-  }, [state.success]);
+  }
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
