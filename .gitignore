@@ -33,3 +33,6 @@ coverage/
 
 # Claude Code: локальные настройки конкретной машины
 .claude/settings.local.json
+
+# Playwright MCP: артефакты браузера (скриншоты, снапшоты)
+.playwright-mcp/
